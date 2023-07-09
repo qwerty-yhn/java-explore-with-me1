@@ -10,6 +10,7 @@ import ru.practicum.events.event.dto.UpdateEventAdminRequest;
 import ru.practicum.events.event.service.EventServiceAdmin;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
@@ -42,7 +43,7 @@ public class EventControllerAdmin {
 
     @PatchMapping("/{eventId}")
     EventFullDto updateEventById(@PathVariable Long eventId,
-                                 @RequestBody UpdateEventAdminRequest updateEventAdminRequest,
+                                 @Valid @RequestBody UpdateEventAdminRequest updateEventAdminRequest,
                                  HttpServletRequest request) {
         EventFullDto eventFullDto = eventServiceAdmin.updateEventById(eventId, updateEventAdminRequest, request);
         return eventFullDto;
