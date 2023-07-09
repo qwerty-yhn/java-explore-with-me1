@@ -22,12 +22,14 @@ public class CompilationControllerPublic {
     public CompilationControllerPublic(CompilationServicePublic compilationService) {
         this.compilationService = compilationService;
     }
+
     @GetMapping()
     public List<CompilationDto> getAllCompilations(@RequestParam(required = false) Boolean pinned,
                                                    @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
                                                    @Positive @RequestParam(defaultValue = "10") Integer size) {
         return compilationService.getAllCompilations(pinned, from, size);
     }
+
     @GetMapping("/{compId}")
     public CompilationDto getCompilationById(@PathVariable Long compId) {
         return compilationService.getCompilationById(compId);
