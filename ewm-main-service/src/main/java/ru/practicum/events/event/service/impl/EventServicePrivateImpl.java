@@ -83,11 +83,11 @@ public class EventServicePrivateImpl implements EventServicePrivate {
     public EventFullDto addPrivateEventByUserId(Long userId, NewEventDto newEventDto) {
         log.info("Получен запрос на добавление события пользователем с id= {} (приватный)", userId);
 
-        if(newEventDto.getEventDate() != null){
+        if (newEventDto.getEventDate() != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
             LocalDateTime eventDateLocalTime = LocalDateTime.parse(newEventDto.getEventDate(), formatter);
 
-            if(eventDateLocalTime.isBefore(LocalDateTime.now())){
+            if (eventDateLocalTime.isBefore(LocalDateTime.now())) {
                 throw new BadRequestException("");
             }
         }
@@ -114,11 +114,11 @@ public class EventServicePrivateImpl implements EventServicePrivate {
     @Override
     public EventFullDto updatePrivateEventByIdAndByUserId(Long userId, Long eventId, UpdateEventUserRequest updateEvent, HttpServletRequest request) {
         log.info("Получен запрос на обновление события с id= {} для пользователя с id= {} (приватный)", eventId, userId);
-        if(updateEvent.getEventDate() != null){
+        if (updateEvent.getEventDate() != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
             LocalDateTime eventDateLocalTime = LocalDateTime.parse(updateEvent.getEventDate(), formatter);
 
-            if(eventDateLocalTime.isBefore(LocalDateTime.now())){
+            if (eventDateLocalTime.isBefore(LocalDateTime.now())) {
                 throw new BadRequestException("");
             }
         }
@@ -131,7 +131,6 @@ public class EventServicePrivateImpl implements EventServicePrivate {
         User user = findObjectInRepository.getUserById(userId);
         checkOwnerEvent(event, user);
         eventAvailability(event);
-
 
 
         if (updateEvent.getAnnotation() != null && !updateEvent.getAnnotation().isBlank()) {

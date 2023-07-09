@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.events.event.dto.EventFullDto;
 import ru.practicum.events.event.dto.UpdateEventAdminRequest;
 import ru.practicum.events.event.service.EventServiceAdmin;
-import ru.practicum.exception.BadRequestException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Positive;

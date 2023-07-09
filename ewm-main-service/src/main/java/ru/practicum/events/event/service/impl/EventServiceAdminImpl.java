@@ -80,24 +80,23 @@ public class EventServiceAdminImpl implements EventServiceAdmin {
         log.info("Получен запрос на обновление события с id= {} (администратором)", eventId);
         Event event = findObjectInRepository.getEventById(eventId);
         eventAvailability(event);
-        if(updateEvent.getEventDate() != null){
+        if (updateEvent.getEventDate() != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
             LocalDateTime eventDateLocalTime = LocalDateTime.parse(updateEvent.getEventDate(), formatter);
 
-            if(eventDateLocalTime.isBefore(LocalDateTime.now())){
+            if (eventDateLocalTime.isBefore(LocalDateTime.now())) {
                 throw new BadRequestException("");
             }
         }
 
 
+        if (updateEvent.getDescription() != null) {
+            if (!(updateEvent.getDescription().length() == 7000 && updateEvent.getAnnotation().length() == 2000)) {
 
-        if(updateEvent.getDescription() != null){
-           if(!(updateEvent.getDescription().length() == 7000 && updateEvent.getAnnotation().length() == 2000)) {
-
-               if (updateEvent.getDescription().length() < 20 || updateEvent.getDescription().length() > 7000 || updateEvent.getAnnotation().length() < 20 || updateEvent.getAnnotation().length() > 200) {
-                   throw new BadRequestException("");
-               }
-           }
+                if (updateEvent.getDescription().length() < 20 || updateEvent.getDescription().length() > 7000 || updateEvent.getAnnotation().length() < 20 || updateEvent.getAnnotation().length() > 200) {
+                    throw new BadRequestException("");
+                }
+            }
         }
 
         if (updateEvent.getEventDate() != null) {

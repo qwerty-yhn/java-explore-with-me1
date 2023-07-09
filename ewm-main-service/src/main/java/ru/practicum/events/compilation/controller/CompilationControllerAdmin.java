@@ -21,16 +21,19 @@ public class CompilationControllerAdmin {
     public CompilationControllerAdmin(CompilationServiceAdmin compilationServiceForAdmin) {
         this.compilationServiceForAdmin = compilationServiceForAdmin;
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CompilationDto addCompilation(@Validated @RequestBody NewCompilationDto newCompilationDto) {
         return compilationServiceForAdmin.addCompilation(newCompilationDto);
     }
+
     @PatchMapping("/{compId}")
     public CompilationDto updateCompilationById(@PathVariable Long compId,
                                                 @Validated @RequestBody UpdateCompilationRequest updateCompilationRequest) {
         return compilationServiceForAdmin.updateCompilationById(compId, updateCompilationRequest);
     }
+
     @DeleteMapping("/{compId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCompilationById(@PathVariable Long compId) {

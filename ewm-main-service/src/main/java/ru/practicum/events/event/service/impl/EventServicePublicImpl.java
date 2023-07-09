@@ -50,7 +50,7 @@ public class EventServicePublicImpl implements EventServicePublic {
     public List<EventShortDto> getAllPublicEvents(String text, List<Long> categories, Boolean paid, String rangeStart,
                                                   String rangeEnd, boolean onlyAvailable, String sort, Integer from, Integer size, HttpServletRequest request) {
 
-        if(rangeStart != null && rangeEnd != null) {
+        if (rangeStart != null && rangeEnd != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
             LocalDateTime rangeStartLocalTime = LocalDateTime.parse(rangeStart, formatter);
             LocalDateTime rangeEndLocalTime = LocalDateTime.parse(rangeEnd, formatter);
