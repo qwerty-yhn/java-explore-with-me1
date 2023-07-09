@@ -24,6 +24,6 @@ public class UpdateEventAdminRequest { // Данные для изменения
     Integer participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
     Boolean requestModeration; // Нужна ли пре-модерация заявок на участие
     ActionStateDto stateAction;
-    @Size(min = 5, max = 120, message = "Минимальное кол-во символов для описания: 5. Максимальное: 255")
+    @Size(min = 3, max = 120, message = "Минимальное кол-во символов для описания: 5. Максимальное: 255")
     String title; // example: Знаменитое шоу 'Летающая кукуруза' Заголовок
 }
