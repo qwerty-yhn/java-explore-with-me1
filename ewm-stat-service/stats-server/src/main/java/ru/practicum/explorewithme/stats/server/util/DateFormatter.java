@@ -15,12 +15,12 @@ public class DateFormatter {
     public static LocalDateTime formatDate(String date) {
         LocalDateTime newDate = null;
         if (date == null) {
-            throw new ValidationDateException("Дата должна быть задана");
+            throw new ValidationDateException("Date should be set");
         }
         try {
             newDate = LocalDateTime.parse(date, formatter);
         } catch (DateTimeParseException e) {
-            throw new ValidationDateException("Неверный формат даты");
+            throw new ValidationDateException("Wrong formate date");
         }
         return newDate;
     }

@@ -24,7 +24,6 @@ public class HitServiceImpl implements HitService {
     @Transactional
     @Override
     public void addHit(HitDto hitDto) {
-        log.info("Сохранение запроса к сервису" + hitDto.getUri());
         Hit hit = HitMapper.toHit(hitDto);
         hitRepository.save(hit);
     }

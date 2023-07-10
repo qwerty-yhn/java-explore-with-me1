@@ -10,7 +10,7 @@ import lombok.extern.jackson.Jacksonized;
 @AllArgsConstructor
 @Jacksonized
 public class StatsDto {
-    String app; //ewm-main-service
-    String uri; // /events/1
-    Long hits; // кол-во
+    String app;
+    String uri;
+    Long hits;
 }
