@@ -10,12 +10,8 @@ import javax.validation.constraints.Pattern;
 @Builder
 public class HitDto {
     Long id;
-    @NotBlank
-    String app;
-    @NotBlank
-    String uri;
-    @NotBlank
-    String ip;
-    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}", message = "Invalid date format")
-    String timestamp;
+    @NotBlank String app;
+    @NotBlank String uri;
+    @NotBlank String ip;
+    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}", message = "Invalid date format") String timestamp;
 }
