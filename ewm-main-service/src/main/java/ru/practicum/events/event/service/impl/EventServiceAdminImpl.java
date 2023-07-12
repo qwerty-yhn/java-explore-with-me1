@@ -23,6 +23,7 @@ import ru.practicum.util.util.DateFormatter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.servlet.http.HttpServletRequest;
 
 import java.time.LocalDateTime;
@@ -75,6 +76,7 @@ public class EventServiceAdminImpl implements EventServiceAdmin {
             return newEvents.stream().map(EventMapper::eventToEventFullDto).collect(Collectors.toList());
         }
     }
+
     @Transactional
     @Override
     public EventFullDto updateEventById(Long eventId, UpdateEventAdminRequest updateEvent, HttpServletRequest request) {
