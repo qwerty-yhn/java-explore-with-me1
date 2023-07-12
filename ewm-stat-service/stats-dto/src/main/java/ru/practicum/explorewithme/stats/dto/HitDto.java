@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Value;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 @Value
 @Builder
