@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import static ru.practicum.util.util.DateFormatter.DATE_FORMAT;
 
 @Service
 @Slf4j
@@ -51,8 +52,6 @@ public class EventServicePrivateImpl implements EventServicePrivate {
     private final RequestRepository requestRepository;
     private final ProcessingEvents processingEvents;
     private final StatsClient client;
-
-    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     @Autowired
     public EventServicePrivateImpl(EventRepository eventRepository,
@@ -84,11 +83,11 @@ public class EventServicePrivateImpl implements EventServicePrivate {
         log.info("Получен запрос на добавление события пользователем с id= {} (приватный)", userId);
 
         if (newEventDto.getEventDate() != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
             LocalDateTime eventDateLocalTime = LocalDateTime.parse(newEventDto.getEventDate(), formatter);
 
             if (eventDateLocalTime.isBefore(LocalDateTime.now())) {
-                throw new BadRequestException("");
+                throw new BadRequestException("Не корректная дата, дата не может быть создана раньше чем сейчас");
             }
         }
 
@@ -115,11 +114,11 @@ public class EventServicePrivateImpl implements EventServicePrivate {
     public EventFullDto updatePrivateEventByIdAndByUserId(Long userId, Long eventId, UpdateEventUserRequest updateEvent, HttpServletRequest request) {
         log.info("Получен запрос на обновление события с id= {} для пользователя с id= {} (приватный)", eventId, userId);
         if (updateEvent.getEventDate() != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
             LocalDateTime eventDateLocalTime = LocalDateTime.parse(updateEvent.getEventDate(), formatter);
 
             if (eventDateLocalTime.isBefore(LocalDateTime.now())) {
-                throw new BadRequestException("");
+                throw new BadRequestException("Не корректная дата, дата не может быть создана раньше чем сейчас");
             }
         }
 

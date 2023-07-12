@@ -29,7 +29,7 @@ public class EventControllerAdmin {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    List<EventFullDto> getAllEventsForAdmin(@RequestParam(required = false) List<Long> users,
+    public List<EventFullDto> getAllEventsForAdmin(@RequestParam(required = false) List<Long> users,
                                             @RequestParam(required = false) List<String> states,
                                             @RequestParam(required = false) List<Long> categories,
                                             @RequestParam(required = false) String rangeStart,
@@ -42,7 +42,7 @@ public class EventControllerAdmin {
     }
 
     @PatchMapping("/{eventId}")
-    EventFullDto updateEventById(@PathVariable Long eventId,
+    public EventFullDto updateEventById(@PathVariable Long eventId,
                                  @Valid @RequestBody UpdateEventAdminRequest updateEventAdminRequest,
                                  HttpServletRequest request) {
         EventFullDto eventFullDto = eventServiceAdmin.updateEventById(eventId, updateEventAdminRequest, request);

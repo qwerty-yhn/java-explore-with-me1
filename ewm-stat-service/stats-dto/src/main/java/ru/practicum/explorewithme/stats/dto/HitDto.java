@@ -1,5 +1,6 @@
 package ru.practicum.explorewithme.stats.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Value;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +16,6 @@ public class HitDto {
     String uri;
     @NotBlank
     String ip;
-    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     String timestamp;
 }

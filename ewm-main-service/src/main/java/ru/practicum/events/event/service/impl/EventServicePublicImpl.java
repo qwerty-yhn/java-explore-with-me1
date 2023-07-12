@@ -26,11 +26,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ru.practicum.util.util.DateFormatter.DATE_FORMAT;
 @Service
 @Slf4j
 @Transactional(readOnly = true)
 public class EventServicePublicImpl implements EventServicePublic {
-    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private final EventRepository eventRepository;
     private final ProcessingEvents processingEvents;
     private final StatsClient client;
@@ -51,7 +51,7 @@ public class EventServicePublicImpl implements EventServicePublic {
                                                   String rangeEnd, boolean onlyAvailable, String sort, Integer from, Integer size, HttpServletRequest request) {
 
         if (rangeStart != null && rangeEnd != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
             LocalDateTime rangeStartLocalTime = LocalDateTime.parse(rangeStart, formatter);
             LocalDateTime rangeEndLocalTime = LocalDateTime.parse(rangeEnd, formatter);
 
@@ -65,7 +65,7 @@ public class EventServicePublicImpl implements EventServicePublic {
                 .app(appName)
                 .uri("/events")
                 .ip(request.getRemoteAddr())
-                .timestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)))
+                .timestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT)))
                 .build();
         client.hitRequest(hitDto);
         List<Event> events = eventRepository.findAllByPublic(text, categories, paid, rangeStart, rangeEnd, sort, from, size);
@@ -97,7 +97,7 @@ public class EventServicePublicImpl implements EventServicePublic {
                 .app(appName)
                 .uri(request.getRequestURI())
                 .ip(request.getRemoteAddr())
-                .timestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)))
+                .timestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT)))
                 .build();
         return hitDto;
     }

@@ -1,5 +1,6 @@
 package ru.practicum.category.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,14 +16,9 @@ import javax.validation.Valid;
 @RequestMapping("/admin/categories")
 @Slf4j
 @Validated
+@RequiredArgsConstructor
 public class CategoryControllerAdmin {
     private final CategoryServiceAdmin service;
-
-
-    @Autowired
-    public CategoryControllerAdmin(CategoryServiceAdmin service) {
-        this.service = service;
-    }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)

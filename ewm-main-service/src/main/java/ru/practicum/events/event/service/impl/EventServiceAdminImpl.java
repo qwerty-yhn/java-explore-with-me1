@@ -22,13 +22,16 @@ import ru.practicum.util.FindObjectInRepository;
 import ru.practicum.util.util.DateFormatter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-
+import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static ru.practicum.util.util.DateFormatter.DATE_FORMAT;
 
 @Service
 @Slf4j
@@ -36,8 +39,6 @@ public class EventServiceAdminImpl implements EventServiceAdmin {
     private final EventRepository eventRepository;
     private final FindObjectInRepository findObjectInRepository;
     private final ProcessingEvents processingEvents;
-
-    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     @Autowired
     public EventServiceAdminImpl(EventRepository eventRepository,
@@ -74,14 +75,14 @@ public class EventServiceAdminImpl implements EventServiceAdmin {
             return newEvents.stream().map(EventMapper::eventToEventFullDto).collect(Collectors.toList());
         }
     }
-
+    @Transactional
     @Override
     public EventFullDto updateEventById(Long eventId, UpdateEventAdminRequest updateEvent, HttpServletRequest request) {
         log.info("Получен запрос на обновление события с id= {} (администратором)", eventId);
         Event event = findObjectInRepository.getEventById(eventId);
         eventAvailability(event);
         if (updateEvent.getEventDate() != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
             LocalDateTime eventDateLocalTime = LocalDateTime.parse(updateEvent.getEventDate(), formatter);
 
             if (eventDateLocalTime.isBefore(LocalDateTime.now())) {
