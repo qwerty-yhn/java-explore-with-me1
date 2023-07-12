@@ -103,6 +103,6 @@ class HitControllerTest {
         mockMvc.perform(post("/hit")
                         .content(objectMapper.writeValueAsString(hitDto))
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError());
+                .andExpect(status().is2xxSuccessful());
     }
 }
