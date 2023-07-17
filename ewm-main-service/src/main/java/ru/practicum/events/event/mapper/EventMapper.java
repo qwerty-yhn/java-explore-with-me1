@@ -34,6 +34,7 @@ public class EventMapper {
                 .views(event.getViews())
                 .build();
     }
+
     public EventCommentDto eventToEventCommentDto(Event event) {
         return EventCommentDto.builder()
                 .annotation(event.getAnnotation())
@@ -44,6 +45,7 @@ public class EventMapper {
                 .title(event.getTitle())
                 .build();
     }
+
     public EventFullDto eventToEventFullDto(Event event) {
         return EventFullDto.builder()
                 .annotation(event.getAnnotation())

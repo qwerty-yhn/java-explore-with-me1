@@ -6,6 +6,7 @@ import ru.practicum.users.model.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
 @Table(name = "comments")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,7 +26,7 @@ public class Comment {
     @JoinColumn(name = "author_id")
     private User author;
     @ManyToOne
-    @JoinColumn(name = "event_id",referencedColumnName = "id")
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
     @Enumerated(EnumType.STRING)
     private CommentState state;
