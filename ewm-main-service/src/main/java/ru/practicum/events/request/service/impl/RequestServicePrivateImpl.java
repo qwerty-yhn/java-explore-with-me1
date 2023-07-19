@@ -20,11 +20,12 @@ import ru.practicum.users.model.User;
 import ru.practicum.util.FindObjectInRepository;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static ru.practicum.util.util.DateFormatter.now;
 
 @Service
 @Slf4j
@@ -70,14 +71,14 @@ public class RequestServicePrivateImpl implements RequestServicePrivate {
 
         if (event.isRequestModeration() && event.getParticipantLimit() != 0) {
             request = Request.builder()
-                    .created(LocalDateTime.now())
+                    .created(now)
                     .event(event)
                     .requester(user)
                     .status(RequestStatus.PENDING)
                     .build();
         } else {
             request = Request.builder()
-                    .created(LocalDateTime.now())
+                    .created(now)
                     .event(event)
                     .requester(user)
                     .status(RequestStatus.CONFIRMED)

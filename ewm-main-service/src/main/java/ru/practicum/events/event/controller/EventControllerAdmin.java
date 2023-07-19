@@ -1,7 +1,7 @@
 package ru.practicum.events.event.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +18,10 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/admin/events")
 @Slf4j
+@RequiredArgsConstructor
 @Validated
 public class EventControllerAdmin {
     private final EventServiceAdmin eventServiceAdmin;
-
-    @Autowired
-    public EventControllerAdmin(EventServiceAdmin eventServiceAdmin) {
-        this.eventServiceAdmin = eventServiceAdmin;
-    }
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)

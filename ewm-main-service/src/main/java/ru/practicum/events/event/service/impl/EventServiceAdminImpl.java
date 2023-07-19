@@ -23,6 +23,7 @@ import ru.practicum.util.util.DateFormatter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
+import ru.practicum.events.event.model.EventState;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -136,7 +137,7 @@ public class EventServiceAdminImpl implements EventServiceAdmin {
             } else if (event.getPublishedOn() == null) {
                 event.setPublishedOn(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)); //????
             }
-            event.setState(determiningTheStatusForEvent(updateEvent.getStateAction()));
+            event.setState(EventState.determineTheStatusForEvent(updateEvent.getStateAction()));
         }
         if (updateEvent.getTitle() != null && !updateEvent.getTitle().isBlank()) {
             event.setTitle(updateEvent.getTitle());
@@ -165,19 +166,19 @@ public class EventServiceAdminImpl implements EventServiceAdmin {
         return timeNow;
     }
 
-    private EventState determiningTheStatusForEvent(ActionStateDto stateAction) {
-        if (stateAction.equals(ActionStateDto.SEND_TO_REVIEW)) {
-            return EventState.PENDING;
-        } else if (stateAction.equals(ActionStateDto.CANCEL_REVIEW)) {
-            return EventState.CANCELED;
-        } else if (stateAction.equals(ActionStateDto.PUBLISH_EVENT)) {
-            return EventState.PUBLISHED;
-        } else if (stateAction.equals(ActionStateDto.REJECT_EVENT)) {
-            return EventState.CANCELED;
-        } else {
-            throw new BadRequestException("Статус не соответствует модификатору доступа");
-        }
-    }
+//    private EventState determiningTheStatusForEvent(ActionStateDto stateAction) {
+//        if (stateAction.equals(ActionStateDto.SEND_TO_REVIEW)) {
+//            return EventState.PENDING;
+//        } else if (stateAction.equals(ActionStateDto.CANCEL_REVIEW)) {
+//            return EventState.CANCELED;
+//        } else if (stateAction.equals(ActionStateDto.PUBLISH_EVENT)) {
+//            return EventState.PUBLISHED;
+//        } else if (stateAction.equals(ActionStateDto.REJECT_EVENT)) {
+//            return EventState.CANCELED;
+//        } else {
+//            throw new BadRequestException("Статус не соответствует модификатору доступа");
+//        }
+//    }
 
     private void eventAvailability(Event event) {
         if (event.getState().equals(EventState.PUBLISHED) || event.getState().equals(EventState.CANCELED)) {

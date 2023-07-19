@@ -23,35 +23,35 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "annotation")
-    private String annotation; // example: Эксклюзивность нашего шоу гарантирует привлечение максимальной зрительской аудитории Краткое описание
+    private String annotation;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
     @Transient
-    private Long confirmedRequests; // Количество одобренных заявок на участие в данном событии
+    private Long confirmedRequests;
     @Column(name = "created_on")
-    private LocalDateTime createdOn; // Дата и время создания события (в формате "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdOn;
     @Column(name = "description")
-    private String description; //Полное описание события
+    private String description;
     @Column(name = "event_date")
-    private LocalDateTime eventDate; //Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime eventDate;
     @ManyToOne
     @JoinColumn(name = "initiator_id")
-    private User initiator; //Пользователь (краткая информация)
+    private User initiator;
     @Embedded
-    private Location location; //Широта и долгота места проведения события
+    private Location location;
     @Column(name = "paid")
-    private boolean paid; // Нужно ли оплачивать участие
+    private boolean paid;
     @Column(name = "participant_limit")
-    private int participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
+    private int participantLimit;
     @Column(name = "published_on")
-    private LocalDateTime publishedOn; //Дата и время публикации события (в формате "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime publishedOn;
     @Column(name = "request_moderation")
-    private boolean requestModeration; // Нужна ли пре-модерация заявок на участие
+    private boolean requestModeration;
     @Enumerated(EnumType.STRING)
-    private EventState state; // example: PUBLISHED, Список состояний жизненного цикла события
+    private EventState state;
     @Column(name = "title", unique = true)
-    private String title; // example: Знаменитое шоу 'Летающая кукуруза' Заголовок
+    private String title;
     @Transient
-    private Long views; // Количество просмотрев события
+    private Long views;
 }
