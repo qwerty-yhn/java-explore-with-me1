@@ -20,7 +20,6 @@ import ru.practicum.users.model.User;
 import ru.practicum.util.FindObjectInRepository;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;

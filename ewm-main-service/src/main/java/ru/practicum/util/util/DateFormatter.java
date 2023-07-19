@@ -15,7 +15,8 @@ public class DateFormatter {
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
     public static final LocalDateTime date = LocalDateTime.of(LocalDate.of(1900, 1, 1), LocalTime.of(0, 0, 1));
 
-     public static final LocalDateTime now = LocalDateTime.now();
+    public static final LocalDateTime now = LocalDateTime.now();
+
     public static LocalDateTime formatDate(String date) {
         LocalDateTime newDate = null;
         if (date == null) {
