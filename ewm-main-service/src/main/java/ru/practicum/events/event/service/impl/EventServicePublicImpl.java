@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static ru.practicum.util.util.DateFormatter.DATE_FORMAT;
+import static ru.practicum.util.util.DateFormatter.formatter;
+
 @Service
 @Slf4j
 @Transactional(readOnly = true)
@@ -51,7 +53,6 @@ public class EventServicePublicImpl implements EventServicePublic {
                                                   String rangeEnd, boolean onlyAvailable, String sort, Integer from, Integer size, HttpServletRequest request) {
 
         if (rangeStart != null && rangeEnd != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
             LocalDateTime rangeStartLocalTime = LocalDateTime.parse(rangeStart, formatter);
             LocalDateTime rangeEndLocalTime = LocalDateTime.parse(rangeEnd, formatter);
 

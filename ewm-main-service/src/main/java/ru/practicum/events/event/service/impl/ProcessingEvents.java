@@ -18,6 +18,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static ru.practicum.util.util.DateFormatter.date;
+
 @Service
 public class ProcessingEvents {
     private final EventRepository eventRepository;
@@ -78,7 +80,6 @@ public class ProcessingEvents {
     }
 
     public long searchViews(Event event, HttpServletRequest request) {
-        LocalDateTime date = LocalDateTime.of(LocalDate.of(1900, 1, 1), LocalTime.of(0, 0, 1));
         LocalDateTime start = event.getPublishedOn() == null ? date : event.getPublishedOn();
         List<StatsDto> stats = client.getStats(start, LocalDateTime.now(), List.of(request.getRequestURI()), true);
         Long hits = stats.stream().map(StatsDto::getHits).reduce(0L, Long::sum);

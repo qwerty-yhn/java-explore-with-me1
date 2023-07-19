@@ -22,34 +22,39 @@ public class CommentsControllerAdmin {
     private final CommentsServiceAdmin commentsServiceAdmin;
 
     @GetMapping("/event/{eventId}")
-    List<CommentDto> getAllCommentsByEventId(@PathVariable Long eventId,
+    public List<CommentDto> getAllCommentsByEventId(@PathVariable Long eventId,
                                              @PositiveOrZero @RequestParam(defaultValue = "0", required = false) Integer from,
                                              @Positive @RequestParam(defaultValue = "10", required = false) Integer size) {
+        log.info("Get all comment by ID = {}(Admin)", eventId);
         return commentsServiceAdmin.getAllCommentsByEventId(eventId, from, size);
     }
 
 
     @PatchMapping("/{commentId}")
-    CommentDto updateComment(@PathVariable Long commentId,
+    public CommentDto updateComment(@PathVariable Long commentId,
                              @Validated @RequestBody UpdateCommentAdminDto updateComment) {
+        log.info("Update comment = {}(Admin)", commentId);
         return commentsServiceAdmin.updateComment(commentId, updateComment);
     }
 
     @GetMapping("/{commentId}")
-    CommentDto getCommentById(@PathVariable Long commentId) {
+    public CommentDto getCommentById(@PathVariable Long commentId) {
+        log.info("Update comment = {}(Admin)", commentId);
         return commentsServiceAdmin.getCommentById(commentId);
     }
 
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    CommentDto createComment(@Validated @RequestBody InputCommentDto inputCommentDto) {
+    public CommentDto createComment(@Validated @RequestBody InputCommentDto inputCommentDto) {
+        log.info("Create comment(Admin)");
         return commentsServiceAdmin.createComment(inputCommentDto);
     }
 
     @DeleteMapping("/{commentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteComment(@PathVariable Long commentId) {
+        log.info("Delete comment with ID = commentId(Admin)");
         commentsServiceAdmin.deleteComment(commentId);
     }
 }

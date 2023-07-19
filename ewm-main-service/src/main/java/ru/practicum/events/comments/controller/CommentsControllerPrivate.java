@@ -22,27 +22,31 @@ public class CommentsControllerPrivate {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    CommentDto createComment(@Validated @RequestBody InputCommentDto inputCommentDto) {
+    public CommentDto createComment(@Validated @RequestBody InputCommentDto inputCommentDto) {
+        log.info("Create comment(Private)");
         return commentsServicePrivate.createComment(inputCommentDto);
     }
 
     @PatchMapping("/{commentId}")
-    CommentDto updateComment(@PathVariable Long commentId,
+    public CommentDto updateComment(@PathVariable Long commentId,
                              @Validated @RequestBody InputCommentDto inputCommentDto) {
+        log.info("Update comment with ID = {}(Private)", commentId);
         return commentsServicePrivate.updateComment(commentId, inputCommentDto);
     }
 
     @GetMapping("/{commentId}/user/{userId}")
-    CommentDto getCommentById(@PathVariable Long commentId,
+    public CommentDto getCommentById(@PathVariable Long commentId,
                               @PathVariable Long userId) {
+        log.info("Get comment with ID = {} and user ID = {}(Private)", commentId, userId);
         return commentsServicePrivate.getCommentById(commentId, userId);
     }
 
     @GetMapping("/event/{eventId}/user/{userId}")
-    List<CommentDto> getAllCommentsByEventId(@PathVariable Long eventId,
+    public List<CommentDto> getAllCommentsByEventId(@PathVariable Long eventId,
                                              @PathVariable Long userId,
                                              @PositiveOrZero @RequestParam(defaultValue = "0", required = false) Integer from,
                                              @Positive @RequestParam(defaultValue = "10", required = false) Integer size) {
+        log.info("Get all comment by event ID = {} and user ID = {}(Private)", eventId, userId);
         return commentsServicePrivate.getAllCommentsByEventId(eventId, userId, from, size);
     }
 
@@ -50,6 +54,7 @@ public class CommentsControllerPrivate {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteComment(@PathVariable Long commentId,
                        @PathVariable Long userId) {
+        log.info("Delete comment by ID = {} and user ID = {}(Private)", commentId, userId);
         commentsServicePrivate.deleteComment(commentId, userId);
     }
 }

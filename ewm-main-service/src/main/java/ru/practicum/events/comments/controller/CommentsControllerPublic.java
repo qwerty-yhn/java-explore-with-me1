@@ -18,9 +18,10 @@ public class CommentsControllerPublic {
     private final CommentsServicePublic commentsServicePublic;
 
     @GetMapping()
-    List<CommentDto> getAllCommentsByEventId(@PathVariable Long eventId,
+    public List<CommentDto> getAllCommentsByEventId(@PathVariable Long eventId,
                                              @PositiveOrZero @RequestParam(defaultValue = "0", required = false) Integer from,
                                              @Positive @RequestParam(defaultValue = "10", required = false) Integer size) {
+        log.info("Get all comment with event ID = {}(Public)", eventId);
         return commentsServicePublic.getAllCommentsByEventId(eventId, from, size);
     }
 }
